@@ -1,0 +1,1140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dominio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="alias" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pwd" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="appId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="loginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="loginResult" type="tns:RegistroOfUsers" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RegistroOfUsers">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:Users" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Users">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBaseOfUsers">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Identification" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Pwd" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Telephone" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Ext" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PositionId" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreationDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModificationDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Domain" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserStateId" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Hours" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserType" type="tns:UserType" />
+              <s:element minOccurs="1" maxOccurs="1" name="StartUseDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="EndUseDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserRoles" type="tns:ArrayOfUserRole" />
+              <s:element minOccurs="0" maxOccurs="1" name="Ticket" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActiveRecordBaseOfUsers" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActiveRecordBase" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordHooksBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActiveRecordHooksBase" abstract="true" />
+      <s:complexType name="ActiveRecordBaseOfCompany" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Company">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBaseOfCompany">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="CompanyId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreationDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModificationDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="BusinessGroupId" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActiveRecordBaseOfActions" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Actions">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBaseOfActions">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="ActionId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Url" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Glyph" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Options" type="tns:Options" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreationDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModificationDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Assigned" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Options">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBaseOfOptions">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="OptionId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ParentId" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Url" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Initials" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Glyph" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsMenu" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreationDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModificationDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Application" type="tns:Applications" />
+              <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Assigned" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActiveRecordBaseOfOptions" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Applications">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBaseOfApplications">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="ApplicationId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreationDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModificationDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActiveRecordBaseOfApplications" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActiveRecordBaseOfPermissions" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Permissions">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBaseOfPermissions">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="PermissionId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Role" type="tns:Roles" />
+              <s:element minOccurs="0" maxOccurs="1" name="Options" type="tns:Options" />
+              <s:element minOccurs="0" maxOccurs="1" name="Actions" type="tns:Actions" />
+              <s:element minOccurs="0" maxOccurs="1" name="Company" type="tns:Company" />
+              <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Roles">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBaseOfRoles">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="RoleId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CreationDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="ModificationDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="Application" type="tns:Applications" />
+              <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="Permission" type="tns:ArrayOfPermissions" />
+              <s:element minOccurs="1" maxOccurs="1" name="Assigned" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActiveRecordBaseOfRoles" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfPermissions">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Permissions" nillable="true" type="tns:Permissions" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ActiveRecordBaseOfUserRole" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UserRole">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBaseOfUserRole">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="UserRoleId" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="User" type="tns:Users" />
+              <s:element minOccurs="0" maxOccurs="1" name="Role" type="tns:Roles" />
+              <s:element minOccurs="0" maxOccurs="1" name="Company" type="tns:Company" />
+              <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActiveRecordBaseOfUserType" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UserType">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBaseOfUserType">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="UserTypeId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="active" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserRole">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserRole" nillable="true" type="tns:UserRole" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="login_cc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cc" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="appId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="login_ccResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login_ccResult" type="tns:RegistroOfUsers" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="aceptar_condiciones">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="acepto" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="usuario_id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="aceptar_condicionesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="aceptar_condicionesResult" type="tns:RegistroOfUserCondition" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RegistroOfUserCondition">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:UserCondition" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserCondition">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBaseOfUserCondition">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="UserConditionId" type="s:long" />
+              <s:element minOccurs="1" maxOccurs="1" name="IAgree" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="AgreeDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="User" type="tns:Users" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActiveRecordBaseOfUserCondition" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ActiveRecordBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="guardar_usuario_dominio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="usuario_id" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="alias" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="guardar_usuario_dominioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guardar_usuario_dominioResult" type="tns:RegistroOfUsers" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="guardar_usuario_dominio_cc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identificacion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="alias" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="guardar_usuario_dominio_ccResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guardar_usuario_dominio_ccResult" type="tns:RegistroOfUsers" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="guardar_usuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identificacion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="alias" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pwd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="apellido" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="telefono" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ext" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ticket" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="guardar_usuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guardar_usuarioResult" type="tns:RegistroOfUsers" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtener_condiciones_usuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="usuario_id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtener_condiciones_usuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtener_condiciones_usuarioResult" type="tns:ListaOfUserCondition" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ListaOfUserCondition">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="success" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="total" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:ArrayOfUserCondition" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserCondition">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserCondition" nillable="true" type="tns:UserCondition" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="obtener_ultimo_registro_x_usuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="usuario_id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtener_ultimo_registro_x_usuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtener_ultimo_registro_x_usuarioResult" type="tns:RegistroOfUserCondition" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtener_x_alias">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="alias" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtener_x_aliasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtener_x_aliasResult" type="tns:RegistroOfUsers" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="actualizar_hora">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id_usuario" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="hora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="actualizar_horaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="actualizar_horaResult" type="tns:result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="result">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="encode_data" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="actualizar_clave">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id_usuario" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="clave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="repita_clave" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="actualizar_claveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="actualizar_claveResult" type="tns:result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="actualizar_clave_cc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identificacion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="clave" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="repita_clave" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="actualizar_clave_ccResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="actualizar_clave_ccResult" type="tns:result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="actualizar_tipo_usuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id_usuario" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="id_tipo_usuario" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="fecha_inicio_uso" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="fecha_fin_uso" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="actualizar_tipo_usuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="actualizar_tipo_usuarioResult" type="tns:result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtener_opciones_x_usuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id_usuario" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="id_empresa" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="id_aplicacion" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtener_opciones_x_usuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtener_opciones_x_usuarioResult" type="tns:MainMenu" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MainMenu">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="roles" type="tns:ArrayOfMenuRole" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMenuRole">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MenuRole" nillable="true" type="tns:MenuRole" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MenuRole">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RoleId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Options" type="tns:ArrayOfMenuOption" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMenuOption">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MenuOption" nillable="true" type="tns:MenuOption" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MenuOption">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OptionId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Glyph" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Url" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sigla" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Options" type="tns:ArrayOfMenuOption" />
+          <s:element minOccurs="0" maxOccurs="1" name="Actions" type="tns:ArrayOfMenuAction" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMenuAction">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MenuAction" nillable="true" type="tns:MenuAction" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MenuAction">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ActionId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Url" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="obtener_menu_por_seccion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="usuarioId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="companyId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="appId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtener_menu_por_seccionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtener_menu_por_seccionResult" type="tns:ArrayOfMenuExtjs" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMenuExtjs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="menuExtjs" nillable="true" type="tns:menuExtjs" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="menuExtjs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="text" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="children" type="tns:ArrayOfMenuExtjs" />
+          <s:element minOccurs="0" maxOccurs="1" name="actions" type="tns:ArrayOfMenuExtjs" />
+          <s:element minOccurs="0" maxOccurs="1" name="iconCls" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="routeId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tooltip" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="rowCls" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="viewType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="leaf" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="expanded" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="consultar_usuario_dominio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="consultar_usuario_dominioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="consultar_usuario_dominioResult" type="tns:RegistroOfUsers" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="bloqueo_apps">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cedula" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="bloqueo_appsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bloqueo_appsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="activar_apps">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cedula" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="activar_appsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="activar_appsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="loginSoapIn">
+    <wsdl:part name="parameters" element="tns:login" />
+  </wsdl:message>
+  <wsdl:message name="loginSoapOut">
+    <wsdl:part name="parameters" element="tns:loginResponse" />
+  </wsdl:message>
+  <wsdl:message name="login_ccSoapIn">
+    <wsdl:part name="parameters" element="tns:login_cc" />
+  </wsdl:message>
+  <wsdl:message name="login_ccSoapOut">
+    <wsdl:part name="parameters" element="tns:login_ccResponse" />
+  </wsdl:message>
+  <wsdl:message name="aceptar_condicionesSoapIn">
+    <wsdl:part name="parameters" element="tns:aceptar_condiciones" />
+  </wsdl:message>
+  <wsdl:message name="aceptar_condicionesSoapOut">
+    <wsdl:part name="parameters" element="tns:aceptar_condicionesResponse" />
+  </wsdl:message>
+  <wsdl:message name="guardar_usuario_dominioSoapIn">
+    <wsdl:part name="parameters" element="tns:guardar_usuario_dominio" />
+  </wsdl:message>
+  <wsdl:message name="guardar_usuario_dominioSoapOut">
+    <wsdl:part name="parameters" element="tns:guardar_usuario_dominioResponse" />
+  </wsdl:message>
+  <wsdl:message name="guardar_usuario_dominio_ccSoapIn">
+    <wsdl:part name="parameters" element="tns:guardar_usuario_dominio_cc" />
+  </wsdl:message>
+  <wsdl:message name="guardar_usuario_dominio_ccSoapOut">
+    <wsdl:part name="parameters" element="tns:guardar_usuario_dominio_ccResponse" />
+  </wsdl:message>
+  <wsdl:message name="guardar_usuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:guardar_usuario" />
+  </wsdl:message>
+  <wsdl:message name="guardar_usuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:guardar_usuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="obtener_condiciones_usuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:obtener_condiciones_usuario" />
+  </wsdl:message>
+  <wsdl:message name="obtener_condiciones_usuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:obtener_condiciones_usuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="obtener_ultimo_registro_x_usuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:obtener_ultimo_registro_x_usuario" />
+  </wsdl:message>
+  <wsdl:message name="obtener_ultimo_registro_x_usuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:obtener_ultimo_registro_x_usuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="obtener_x_aliasSoapIn">
+    <wsdl:part name="parameters" element="tns:obtener_x_alias" />
+  </wsdl:message>
+  <wsdl:message name="obtener_x_aliasSoapOut">
+    <wsdl:part name="parameters" element="tns:obtener_x_aliasResponse" />
+  </wsdl:message>
+  <wsdl:message name="actualizar_horaSoapIn">
+    <wsdl:part name="parameters" element="tns:actualizar_hora" />
+  </wsdl:message>
+  <wsdl:message name="actualizar_horaSoapOut">
+    <wsdl:part name="parameters" element="tns:actualizar_horaResponse" />
+  </wsdl:message>
+  <wsdl:message name="actualizar_claveSoapIn">
+    <wsdl:part name="parameters" element="tns:actualizar_clave" />
+  </wsdl:message>
+  <wsdl:message name="actualizar_claveSoapOut">
+    <wsdl:part name="parameters" element="tns:actualizar_claveResponse" />
+  </wsdl:message>
+  <wsdl:message name="actualizar_clave_ccSoapIn">
+    <wsdl:part name="parameters" element="tns:actualizar_clave_cc" />
+  </wsdl:message>
+  <wsdl:message name="actualizar_clave_ccSoapOut">
+    <wsdl:part name="parameters" element="tns:actualizar_clave_ccResponse" />
+  </wsdl:message>
+  <wsdl:message name="actualizar_tipo_usuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:actualizar_tipo_usuario" />
+  </wsdl:message>
+  <wsdl:message name="actualizar_tipo_usuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:actualizar_tipo_usuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="obtener_opciones_x_usuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:obtener_opciones_x_usuario" />
+  </wsdl:message>
+  <wsdl:message name="obtener_opciones_x_usuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:obtener_opciones_x_usuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="obtener_menu_por_seccionSoapIn">
+    <wsdl:part name="parameters" element="tns:obtener_menu_por_seccion" />
+  </wsdl:message>
+  <wsdl:message name="obtener_menu_por_seccionSoapOut">
+    <wsdl:part name="parameters" element="tns:obtener_menu_por_seccionResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultar_usuario_dominioSoapIn">
+    <wsdl:part name="parameters" element="tns:consultar_usuario_dominio" />
+  </wsdl:message>
+  <wsdl:message name="consultar_usuario_dominioSoapOut">
+    <wsdl:part name="parameters" element="tns:consultar_usuario_dominioResponse" />
+  </wsdl:message>
+  <wsdl:message name="bloqueo_appsSoapIn">
+    <wsdl:part name="parameters" element="tns:bloqueo_apps" />
+  </wsdl:message>
+  <wsdl:message name="bloqueo_appsSoapOut">
+    <wsdl:part name="parameters" element="tns:bloqueo_appsResponse" />
+  </wsdl:message>
+  <wsdl:message name="activar_appsSoapIn">
+    <wsdl:part name="parameters" element="tns:activar_apps" />
+  </wsdl:message>
+  <wsdl:message name="activar_appsSoapOut">
+    <wsdl:part name="parameters" element="tns:activar_appsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSeguridadSoap">
+    <wsdl:operation name="login">
+      <wsdl:input message="tns:loginSoapIn" />
+      <wsdl:output message="tns:loginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="login_cc">
+      <wsdl:input message="tns:login_ccSoapIn" />
+      <wsdl:output message="tns:login_ccSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="aceptar_condiciones">
+      <wsdl:input message="tns:aceptar_condicionesSoapIn" />
+      <wsdl:output message="tns:aceptar_condicionesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="guardar_usuario_dominio">
+      <wsdl:input message="tns:guardar_usuario_dominioSoapIn" />
+      <wsdl:output message="tns:guardar_usuario_dominioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="guardar_usuario_dominio_cc">
+      <wsdl:input message="tns:guardar_usuario_dominio_ccSoapIn" />
+      <wsdl:output message="tns:guardar_usuario_dominio_ccSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="guardar_usuario">
+      <wsdl:input message="tns:guardar_usuarioSoapIn" />
+      <wsdl:output message="tns:guardar_usuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="obtener_condiciones_usuario">
+      <wsdl:input message="tns:obtener_condiciones_usuarioSoapIn" />
+      <wsdl:output message="tns:obtener_condiciones_usuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="obtener_ultimo_registro_x_usuario">
+      <wsdl:input message="tns:obtener_ultimo_registro_x_usuarioSoapIn" />
+      <wsdl:output message="tns:obtener_ultimo_registro_x_usuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="obtener_x_alias">
+      <wsdl:input message="tns:obtener_x_aliasSoapIn" />
+      <wsdl:output message="tns:obtener_x_aliasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="actualizar_hora">
+      <wsdl:input message="tns:actualizar_horaSoapIn" />
+      <wsdl:output message="tns:actualizar_horaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="actualizar_clave">
+      <wsdl:input message="tns:actualizar_claveSoapIn" />
+      <wsdl:output message="tns:actualizar_claveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="actualizar_clave_cc">
+      <wsdl:input message="tns:actualizar_clave_ccSoapIn" />
+      <wsdl:output message="tns:actualizar_clave_ccSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="actualizar_tipo_usuario">
+      <wsdl:input message="tns:actualizar_tipo_usuarioSoapIn" />
+      <wsdl:output message="tns:actualizar_tipo_usuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="obtener_opciones_x_usuario">
+      <wsdl:input message="tns:obtener_opciones_x_usuarioSoapIn" />
+      <wsdl:output message="tns:obtener_opciones_x_usuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="obtener_menu_por_seccion">
+      <wsdl:input message="tns:obtener_menu_por_seccionSoapIn" />
+      <wsdl:output message="tns:obtener_menu_por_seccionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="consultar_usuario_dominio">
+      <wsdl:input message="tns:consultar_usuario_dominioSoapIn" />
+      <wsdl:output message="tns:consultar_usuario_dominioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="bloqueo_apps">
+      <wsdl:input message="tns:bloqueo_appsSoapIn" />
+      <wsdl:output message="tns:bloqueo_appsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="activar_apps">
+      <wsdl:input message="tns:activar_appsSoapIn" />
+      <wsdl:output message="tns:activar_appsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSeguridadSoap" type="tns:WebServiceSeguridadSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="login">
+      <soap:operation soapAction="http://tempuri.org/login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="login_cc">
+      <soap:operation soapAction="http://tempuri.org/login_cc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="aceptar_condiciones">
+      <soap:operation soapAction="http://tempuri.org/aceptar_condiciones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="guardar_usuario_dominio">
+      <soap:operation soapAction="http://tempuri.org/guardar_usuario_dominio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="guardar_usuario_dominio_cc">
+      <soap:operation soapAction="http://tempuri.org/guardar_usuario_dominio_cc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="guardar_usuario">
+      <soap:operation soapAction="http://tempuri.org/guardar_usuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtener_condiciones_usuario">
+      <soap:operation soapAction="http://tempuri.org/obtener_condiciones_usuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtener_ultimo_registro_x_usuario">
+      <soap:operation soapAction="http://tempuri.org/obtener_ultimo_registro_x_usuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtener_x_alias">
+      <soap:operation soapAction="http://tempuri.org/obtener_x_alias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizar_hora">
+      <soap:operation soapAction="http://tempuri.org/actualizar_hora" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizar_clave">
+      <soap:operation soapAction="http://tempuri.org/actualizar_clave" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizar_clave_cc">
+      <soap:operation soapAction="http://tempuri.org/actualizar_clave_cc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizar_tipo_usuario">
+      <soap:operation soapAction="http://tempuri.org/actualizar_tipo_usuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtener_opciones_x_usuario">
+      <soap:operation soapAction="http://tempuri.org/obtener_opciones_x_usuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtener_menu_por_seccion">
+      <soap:operation soapAction="http://tempuri.org/obtener_menu_por_seccion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultar_usuario_dominio">
+      <soap:operation soapAction="http://tempuri.org/consultar_usuario_dominio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="bloqueo_apps">
+      <soap:operation soapAction="http://tempuri.org/bloqueo_apps" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="activar_apps">
+      <soap:operation soapAction="http://tempuri.org/activar_apps" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSeguridadSoap12" type="tns:WebServiceSeguridadSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="login">
+      <soap12:operation soapAction="http://tempuri.org/login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="login_cc">
+      <soap12:operation soapAction="http://tempuri.org/login_cc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="aceptar_condiciones">
+      <soap12:operation soapAction="http://tempuri.org/aceptar_condiciones" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="guardar_usuario_dominio">
+      <soap12:operation soapAction="http://tempuri.org/guardar_usuario_dominio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="guardar_usuario_dominio_cc">
+      <soap12:operation soapAction="http://tempuri.org/guardar_usuario_dominio_cc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="guardar_usuario">
+      <soap12:operation soapAction="http://tempuri.org/guardar_usuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtener_condiciones_usuario">
+      <soap12:operation soapAction="http://tempuri.org/obtener_condiciones_usuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtener_ultimo_registro_x_usuario">
+      <soap12:operation soapAction="http://tempuri.org/obtener_ultimo_registro_x_usuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtener_x_alias">
+      <soap12:operation soapAction="http://tempuri.org/obtener_x_alias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizar_hora">
+      <soap12:operation soapAction="http://tempuri.org/actualizar_hora" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizar_clave">
+      <soap12:operation soapAction="http://tempuri.org/actualizar_clave" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizar_clave_cc">
+      <soap12:operation soapAction="http://tempuri.org/actualizar_clave_cc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizar_tipo_usuario">
+      <soap12:operation soapAction="http://tempuri.org/actualizar_tipo_usuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtener_opciones_x_usuario">
+      <soap12:operation soapAction="http://tempuri.org/obtener_opciones_x_usuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtener_menu_por_seccion">
+      <soap12:operation soapAction="http://tempuri.org/obtener_menu_por_seccion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultar_usuario_dominio">
+      <soap12:operation soapAction="http://tempuri.org/consultar_usuario_dominio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="bloqueo_apps">
+      <soap12:operation soapAction="http://tempuri.org/bloqueo_apps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="activar_apps">
+      <soap12:operation soapAction="http://tempuri.org/activar_apps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebServiceSeguridad">
+    <wsdl:port name="WebServiceSeguridadSoap" binding="tns:WebServiceSeguridadSoap">
+      <soap:address location="http://10.1.2.17/IdentityManager/WebServiceSeguridad.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceSeguridadSoap12" binding="tns:WebServiceSeguridadSoap12">
+      <soap12:address location="http://10.1.2.17/IdentityManager/WebServiceSeguridad.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
